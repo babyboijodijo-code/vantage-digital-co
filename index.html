@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vantage Digital Co. — AI Strategy & Web Development for Spokane Small Businesses</title>
+  <meta name="description" content="Vantage Digital Co. helps Spokane small businesses modernize operations, dominate local search, and automate the work eating your time. AI strategy, web development, and automation built for the real world." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1C2B4A;
+      --teal:   #00C9A7;
+      --teal-dark: #00a889;
+      --offwhite: #F7F9FC;
+      --charcoal: #2D3748;
+      --gray:   #718096;
+      --light-gray: #E2E8F0;
+      --white:  #FFFFFF;
+      --font-head: 'Montserrat', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 5%;
+      background: rgba(28, 43, 74, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--teal);
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      padding: 0.55rem 1.25rem;
+      border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dark) !important; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      padding: 8rem 5% 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,201,167,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,201,167,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,201,167,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; max-width: 780px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,201,167,0.12);
+      border: 1px solid rgba(0,201,167,0.3);
+      color: var(--teal);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; }
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    h1 em { color: var(--teal); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.65);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--teal); color: var(--navy);
+      font-family: var(--font-head); font-weight: 700;
+      font-size: 0.95rem; padding: 0.9rem 1.75rem;
+      border-radius: 8px; text-decoration: none;
+      transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 8px 25px rgba(0,201,167,0.3); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.95rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--white); }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: 2rem; color: var(--white);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--teal); }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.3rem; }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--offwhite);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 1rem 5%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; flex-wrap: wrap;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--gray);
+    }
+    .trust-bar span { color: var(--light-gray); }
+
+    /* ─── SECTIONS COMMON ─── */
+    section { padding: 5.5rem 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.02em; color: var(--navy);
+      margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--gray);
+      max-width: 560px; line-height: 1.7;
+    }
+    .max-w { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── PROBLEM ─── */
+    #problem { background: var(--white); }
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; margin-top: 3.5rem;
+    }
+    .problem-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+    .problem-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem; border-radius: 10px;
+      border: 1px solid var(--light-gray);
+      background: var(--offwhite);
+    }
+    .problem-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      background: rgba(28,43,74,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .problem-text strong { display: block; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; font-size: 0.95rem; }
+    .problem-text p { font-size: 0.88rem; color: var(--gray); line-height: 1.5; }
+    .problem-right { }
+    .problem-callout {
+      background: var(--navy);
+      border-radius: 16px; padding: 2.5rem;
+      color: var(--white);
+    }
+    .problem-callout p {
+      font-size: 1.15rem; line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.5rem;
+    }
+    .problem-callout strong { color: var(--white); }
+    .problem-callout .callout-accent {
+      color: var(--teal);
+      font-family: var(--font-head);
+      font-weight: 700; font-size: 1.1rem;
+    }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--offwhite); }
+    .services-header { margin-bottom: 3rem; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 14px; padding: 2rem;
+      transition: all 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,201,167,0.12);
+    }
+    .service-card.featured {
+      border-color: var(--teal);
+      background: linear-gradient(135deg, var(--navy) 0%, #253660 100%);
+    }
+    .service-card.featured * { color: rgba(255,255,255,0.85); }
+    .service-card.featured h3 { color: var(--white); }
+    .service-card.featured .service-price { color: var(--teal); }
+    .service-card.featured .service-tag { background: rgba(0,201,167,0.15); color: var(--teal); }
+    .service-card.featured:hover { box-shadow: 0 12px 40px rgba(0,201,167,0.25); }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(0,201,167,0.1);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.25rem;
+    }
+    .service-card.featured .service-icon { background: rgba(0,201,167,0.15); }
+    .service-tag {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(0,201,167,0.1); color: var(--teal);
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+    h3 {
+      font-family: var(--font-head); font-weight: 700;
+      font-size: 1.2rem; color: var(--navy);
+      margin-bottom: 0.75rem; line-height: 1.25;
+    }
+    .service-price {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: 1.5rem; color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .service-desc { font-size: 0.92rem; color: var(--gray); line-height: 1.65; margin-bottom: 1.25rem; }
+    .service-card.featured .service-desc { color: rgba(255,255,255,0.65); }
+    .service-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .service-list li {
+      font-size: 0.88rem; color: var(--charcoal);
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .service-list li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+    .service-card.featured .service-list li { color: rgba(255,255,255,0.75); }
+
+    /* ─── HOW IT WORKS ─── */
+    #how { background: var(--white); }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0; margin-top: 3.5rem; position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute; top: 28px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--teal), transparent);
+      opacity: 0.25;
+    }
+    .step { text-align: center; padding: 0 1.5rem; position: relative; }
+    .step-num {
+      width: 56px; height: 56px;
+      background: var(--navy); color: var(--teal);
+      font-family: var(--font-head); font-weight: 800; font-size: 1.2rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      position: relative; z-index: 1;
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--navy);
+    }
+    .step h3 { font-size: 1rem; margin-bottom: 0.6rem; }
+    .step p { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--navy); }
+    #about .section-label { color: var(--teal); }
+    #about h2 { color: var(--white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 4rem; align-items: center; margin-top: 3rem;
+    }
+    .about-img-wrap {
+      border-radius: 16px; overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      aspect-ratio: 4/5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-placeholder {
+      font-size: 5rem; opacity: 0.2;
+    }
+    .about-text p {
+      color: rgba(255,255,255,0.65); line-height: 1.8;
+      font-size: 1rem; margin-bottom: 1.25rem;
+    }
+    .about-text strong { color: var(--white); }
+    .about-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .chip {
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.4rem 0.9rem; border-radius: 100px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--offwhite); }
+    .faq-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.25rem; margin-top: 3rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: 12px; padding: 1.75rem;
+    }
+    .faq-item h4 {
+      font-family: var(--font-head); font-weight: 700;
+      font-size: 0.97rem; color: var(--navy);
+      margin-bottom: 0.75rem; line-height: 1.35;
+    }
+    .faq-item p { font-size: 0.91rem; color: var(--gray); line-height: 1.65; }
+
+    /* ─── CTA ─── */
+    #cta {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
+      text-align: center; padding: 6rem 5%;
+      position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,201,167,0.15) 0%, transparent 70%);
+    }
+    #cta .section-label { justify-content: center; display: flex; }
+    #cta h2 { color: var(--white); max-width: 600px; margin: 0 auto 1rem; }
+    #cta p { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+    .cta-box {
+      display: inline-flex; flex-direction: column; align-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 2.5rem 3rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .cta-price {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: 3rem; color: var(--white); line-height: 1;
+    }
+    .cta-price span { color: var(--teal); }
+    .cta-desc { font-size: 0.9rem; color: rgba(255,255,255,0.5); margin: 0.5rem 0 1.75rem; }
+    .cta-contact { color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-top: 0.5rem; }
+    .cta-contact a { color: rgba(255,255,255,0.6); }
+    .cta-contact a:hover { color: var(--teal); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111827;
+      padding: 2.5rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--font-head); font-weight: 700;
+      color: rgba(255,255,255,0.5); font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--teal); }
+    footer p { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-wrap { aspect-ratio: 3/2; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up-2 { animation: fadeUp 0.6s 0.1s ease both; }
+    .fade-up-3 { animation: fadeUp 0.6s 0.2s ease both; }
+    .fade-up-4 { animation: fadeUp 0.6s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">Vantage<span>.</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#how">Process</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cta" class="nav-cta">Book Audit — $1,000</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">Spokane, WA · Local Business Specialists</div>
+    <h1 class="fade-up-2">Your Business Deserves a <em>Digital Advantage.</em></h1>
+    <p class="hero-sub fade-up-3">
+      We help Spokane small businesses modernize their operations, dominate local search,
+      and automate the work eating your time — so you can focus on what you actually built this for.
+    </p>
+    <div class="hero-actions fade-up-4">
+      <a href="#cta" class="btn-primary">Book Your AI Audit →</a>
+      <a href="#services" class="btn-ghost">See what we do ↓</a>
+    </div>
+    <div class="hero-stats fade-up-4">
+      <div class="stat-item">
+        <div class="stat-num">$1<span>K</span></div>
+        <div class="stat-label">Entry audit — no fluff</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2<span>hr</span></div>
+        <div class="stat-label">To a clear action plan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3<span>–</span>5</div>
+        <div class="stat-label">Specific wins identified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ─── -->
+<div class="trust-bar">
+  AI Strategy <span>·</span> Web Development <span>·</span> Business Automation <span>·</span> Local Search Optimization <span>·</span> Spokane, WA
+</div>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="max-w">
+    <div class="section-label">The Reality Check</div>
+    <h2>Most Local Businesses Are Running on Yesterday's Playbook.</h2>
+    <div class="problem-grid">
+      <ul class="problem-list">
+        <li>
+          <div class="problem-icon">🌐</div>
+          <div class="problem-text">
+            <strong>Outdated or invisible online</strong>
+            <p>Your website looks like 2015 or doesn't show up when locals search for what you do.</p>
+          </div>
+        </li>
+        <li>
+          <div class="problem-icon">⏳</div>
+          <div class="problem-text">
+            <strong>Time lost to manual work</strong>
+            <p>Scheduling, follow-up, invoicing — done by hand, every time, eating hours you don't have.</p>
+          </div>
+        </li>
+        <li>
+          <div class="problem-icon">📣</div>
+          <div class="problem-text">
+            <strong>No real marketing strategy</strong>
+            <p>You're posting occasionally and hoping for the best. Competitors with worse service get the calls.</p>
+          </div>
+        </li>
+        <li>
+          <div class="problem-icon">🤖</div>
+          <div class="problem-text">
+            <strong>AI feels overwhelming or irrelevant</strong>
+            <p>You've heard AI can help your business — but nobody's shown you exactly how, for your situation.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="problem-right">
+        <div class="problem-callout">
+          <p>You built something real. But somewhere between running the day-to-day, managing your team, and serving customers — <strong>the digital side of your business got left behind.</strong></p>
+          <p>That's not a you problem. It's a <strong>"no one showed you a better way"</strong> problem.</p>
+          <p class="callout-accent">That's what we're here for.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <div class="max-w">
+    <div class="services-header">
+      <div class="section-label">What We Do</div>
+      <h2>Services Built for Real Businesses.</h2>
+      <p class="section-sub">No packages with vague promises. Clear deliverables, fixed timelines, and results you can measure.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card featured">
+        <div class="service-icon">🔍</div>
+        <div class="service-tag">Start Here</div>
+        <h3>AI Opportunity Audit</h3>
+        <div class="service-price">$1,000</div>
+        <p class="service-desc">The fastest way to see exactly what's holding your business back — and what to do about it. Two focused hours. A written action plan you can act on immediately.</p>
+        <ul class="service-list">
+          <li>Operations analysis — where time is being wasted</li>
+          <li>Online presence audit & competitor review</li>
+          <li>3–5 prioritized, specific recommendations</li>
+          <li>Written action plan delivered same day</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <div class="service-tag">Web</div>
+        <h3>Website Design & Development</h3>
+        <div class="service-price">From $1,500</div>
+        <p class="service-desc">A website that actually works — loads fast, looks great on mobile, shows up on Google, and turns visitors into customers.</p>
+        <ul class="service-list">
+          <li>5–7 page professional website</li>
+          <li>Mobile-optimized design</li>
+          <li>SEO foundation built in</li>
+          <li>Google Business Profile setup</li>
+          <li>Lead capture + automated follow-up</li>
+          <li>30 days post-launch support</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-tag">Automation</div>
+        <h3>AI Automation Setup</h3>
+        <div class="service-price">From $1,500</div>
+        <p class="service-desc">Stop doing manually what a system can handle automatically. We find your biggest time-waster and build an automation that runs it for you.</p>
+        <ul class="service-list">
+          <li>Appointment booking + reminders</li>
+          <li>Invoice generation + payment follow-up</li>
+          <li>Lead → CRM + follow-up sequences</li>
+          <li>Automated review requests</li>
+          <li>No expensive SaaS subscriptions</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📣</div>
+        <div class="service-tag">Marketing</div>
+        <h3>Marketing Launch Package</h3>
+        <div class="service-price">$1,000 – $2,000</div>
+        <p class="service-desc">A 90-day marketing roadmap tailored to your business and your Spokane market — plus the tools to actually execute it.</p>
+        <ul class="service-list">
+          <li>Local competitor analysis</li>
+          <li>90-day content strategy</li>
+          <li>Social profile optimization</li>
+          <li>Email marketing setup & sequences</li>
+          <li>Monthly newsletter template</li>
+        </ul>
+      </div>
+
+      <div class="service-card" style="border-color: var(--teal); background: linear-gradient(135deg, #f0fefa, #fff);">
+        <div class="service-icon">🚀</div>
+        <div class="service-tag">Best Value</div>
+        <h3>Full Growth Sprint</h3>
+        <div class="service-price" style="color: var(--navy);">$3,500 – $6,000</div>
+        <p class="service-desc">Everything above in one focused 30-day engagement. Audit → Website → Automation → Marketing. Done. Working together.</p>
+        <ul class="service-list">
+          <li>Complete AI audit + action plan</li>
+          <li>New website, live and optimized</li>
+          <li>Top automation built and running</li>
+          <li>90-day marketing strategy</li>
+          <li>30 days of support after launch</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section id="how">
+  <div class="max-w">
+    <div class="section-label">The Process</div>
+    <h2>Simple. Fast. No Surprises.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Free 15-Min Call</h3>
+        <p>We talk about your business and where you're stuck. No pitch — just conversation to make sure we're a fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>AI Opportunity Audit</h3>
+        <p>2-hour deep-dive. You get a written action plan with your highest-leverage moves, in priority order.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>We Build, You Approve</h3>
+        <p>Fast timelines. Clear communication. You see progress throughout — no disappearing acts.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>You Grow</h3>
+        <p>We stay available. Your systems keep running. You have a digital partner who knows your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="max-w">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-placeholder">👤</div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">About</div>
+        <h2>Built by a Builder, for Business Owners.</h2>
+        <p>Hi, I'm <strong>Josiah Harris</strong> — founder of Vantage Digital Co. I'm a lifelong problem-solver with a background in web development, AI integration, and business optimization.</p>
+        <p>I started my career doing aerial photography, then taught myself to build software. Today I run multiple digital products and businesses — and I use the same systems I build for clients in my own work every day.</p>
+        <p>I'm not a big agency. I'm not going to hand you off to a junior. When you work with Vantage Digital, <strong>you work with me</strong> — and I treat your business like it's my own.</p>
+        <p><strong>Based in Spokane, WA. Serving businesses across the Pacific Northwest.</strong></p>
+        <div class="about-chips">
+          <span class="chip">AI Integration</span>
+          <span class="chip">Web Development</span>
+          <span class="chip">Business Automation</span>
+          <span class="chip">Digital Marketing</span>
+          <span class="chip">Local SEO</span>
+          <span class="chip">Spokane Native</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="max-w">
+    <div class="section-label">Questions</div>
+    <h2>Things People Usually Ask.</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Why $1,000 for an audit?</h4>
+        <p>Because your time is worth more than a free call where I tell you what you want to hear. The audit produces a real deliverable — a written action plan with specific, prioritized recommendations. Most clients say it pays for itself in the first month.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do I have to start with the audit?</h4>
+        <p>Not always. If you know exactly what you need — a new website or a specific automation — we can jump straight to a project quote. The audit is for business owners who want clarity first.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How fast do you work?</h4>
+        <p>Websites: 2–3 weeks. Automations: 1–2 weeks. Marketing packages: delivered within a week. Full Growth Sprint: 30 days. I set real timelines and I hit them.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I'm not tech-savvy?</h4>
+        <p>Perfect — that's exactly who this is built for. I handle the technical side completely and explain everything in plain language. You don't need to understand how it works, just that it works.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do you work outside Spokane?</h4>
+        <p>Yes. Most of our work can be done remotely. We have a preference for local clients, but we've worked with businesses across Washington State and beyond.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What industries do you work with?</h4>
+        <p>Contractors, medical & dental practices, real estate, restaurants, retail, law firms, fitness studios, and professional services. If you serve local customers and want more of them, we can help.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta">
+  <div class="section-label">Get Started</div>
+  <h2>Ready to See What's Possible?</h2>
+  <p>Walk away with a clear, written plan for growing your business — built specifically for you.</p>
+  <div class="cta-box">
+    <div class="cta-price">$1<span>,000</span></div>
+    <div class="cta-desc">AI Opportunity Audit · 2 Hours · Immediate Clarity</div>
+    <a href="mailto:josiahharris@altitudeimaginginc.com?subject=AI Audit Inquiry" class="btn-primary" style="font-size:1rem; padding: 1rem 2.25rem;">
+      Book Your Audit Now →
+    </a>
+  </div>
+  <p class="cta-contact">
+    Or reach out directly:
+    <a href="mailto:josiahharris@altitudeimaginginc.com">josiahharris@altitudeimaginginc.com</a>
+    &nbsp;·&nbsp;
+    <a href="tel:+15098668612">509-866-8612</a>
+  </p>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="#" class="footer-logo">Vantage Digital<span> Co.</span></a>
+  <p>© 2026 Vantage Digital Co. · A division of Altitude Imaging LLC · Spokane, WA</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#cta">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Smooth reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .faq-item, .step, .problem-list li').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
