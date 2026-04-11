@@ -18,7 +18,8 @@
       --white:    #F0EDE8;
       --muted:    rgba(240,237,232,0.35);
       --border:   rgba(240,237,232,0.1);
-      --radius:   680px;
+      --radius:   500px;
+      --depth:    20px;
       --font-d:   'Cormorant Garamond', serif;
       --font-ui:  'Inter', sans-serif;
     }
@@ -179,7 +180,7 @@
     #stage {
       position: fixed;
       inset: 0;
-      perspective: 1400px;
+      perspective: 900px;
       perspective-origin: 50% 50%;
     }
 
@@ -205,11 +206,22 @@
       flex-direction: column;
       justify-content: flex-end;
       padding: 2rem 2.25rem;
-      background: rgba(8,6,4,0.75);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      transition: opacity 0.5s ease, box-shadow 0.5s ease;
+      /* Glass */
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.07) 0%,
+        rgba(255,255,255,0.02) 50%,
+        rgba(201,164,90,0.03) 100%
+      );
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 1px solid rgba(255,255,255,0.22);
+      border-left: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: opacity 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
       pointer-events: none;
       will-change: opacity;
       user-select: none;
@@ -217,7 +229,14 @@
     }
 
     .panel.active {
-      box-shadow: 0 0 80px rgba(201,164,90,0.08), inset 0 0 0 1px rgba(201,164,90,0.2);
+      border-color: rgba(201,164,90,0.35);
+      border-top-color: rgba(255,255,255,0.3);
+      border-left-color: rgba(255,255,255,0.22);
+      box-shadow:
+        0 8px 48px rgba(0,0,0,0.55),
+        0 0 80px rgba(201,164,90,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 0 30px rgba(201,164,90,0.04);
       pointer-events: auto;
     }
 
@@ -350,6 +369,190 @@
       pointer-events: none;
     }
 
+    /* ─── PANEL THICKNESS FACES ─── */
+    /* Back face — receives orb glow from behind */
+    .panel-back {
+      position: absolute;
+      inset: 0;
+      transform: translateZ(calc(-1 * var(--depth)));
+      background: linear-gradient(
+        135deg,
+        rgba(201,164,90,0.18) 0%,
+        rgba(201,164,90,0.08) 40%,
+        rgba(0,0,0,0.6) 100%
+      );
+      border: 1px solid rgba(201,164,90,0.2);
+      pointer-events: none;
+    }
+
+    /* Left edge — catches orb light coming from center */
+    .panel-side-left {
+      position: absolute;
+      top: 0; right: 100%;
+      width: var(--depth); height: 100%;
+      transform-origin: right center;
+      transform: rotateY(-90deg);
+      background: linear-gradient(to left,
+        rgba(201,164,90,0.55) 0%,
+        rgba(201,164,90,0.15) 60%,
+        transparent 100%
+      );
+      border-top: 1px solid rgba(201,164,90,0.2);
+      border-bottom: 1px solid rgba(201,164,90,0.1);
+      pointer-events: none;
+    }
+
+    /* Right edge */
+    .panel-side-right {
+      position: absolute;
+      top: 0; left: 100%;
+      width: var(--depth); height: 100%;
+      transform-origin: left center;
+      transform: rotateY(90deg);
+      background: linear-gradient(to right,
+        rgba(201,164,90,0.45) 0%,
+        rgba(201,164,90,0.1) 60%,
+        transparent 100%
+      );
+      border-top: 1px solid rgba(201,164,90,0.15);
+      border-bottom: 1px solid rgba(201,164,90,0.08);
+      pointer-events: none;
+    }
+
+    /* Top edge — brightest, catch-light from orb glow above */
+    .panel-side-top {
+      position: absolute;
+      bottom: 100%; left: 0;
+      width: 100%; height: var(--depth);
+      transform-origin: bottom center;
+      transform: rotateX(90deg);
+      background: linear-gradient(to top,
+        rgba(255,255,255,0.25) 0%,
+        rgba(201,164,90,0.35) 40%,
+        rgba(201,164,90,0.08) 100%
+      );
+      border-left: 1px solid rgba(201,164,90,0.15);
+      border-right: 1px solid rgba(201,164,90,0.1);
+      pointer-events: none;
+    }
+
+    /* Bottom edge — darker, ambient only */
+    .panel-side-bottom {
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%; height: var(--depth);
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      background: linear-gradient(to bottom,
+        rgba(201,164,90,0.12) 0%,
+        rgba(0,0,0,0.4) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ─── CENTER ORB ─── */
+    #orb-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      width: 300px; height: 300px;
+    }
+
+    /* Ambient light bloom — large soft halo */
+    #orb-bloom {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(201,164,90,0.12) 0%,
+        rgba(201,164,90,0.05) 35%,
+        transparent 70%
+      );
+      animation: bloom-pulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes bloom-pulse {
+      0%, 100% { transform: translate(-50%,-50%) scale(1);   opacity: 0.7; }
+      50%       { transform: translate(-50%,-50%) scale(1.18); opacity: 1; }
+    }
+
+    /* Core glow */
+    #orb-core {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        #fff9ee 0%,
+        rgba(201,164,90,1) 35%,
+        rgba(201,164,90,0.4) 65%,
+        transparent 100%
+      );
+      box-shadow:
+        0 0 8px 3px rgba(255,245,210,0.8),
+        0 0 20px 8px rgba(201,164,90,0.6),
+        0 0 50px 18px rgba(201,164,90,0.25),
+        0 0 100px 40px rgba(201,164,90,0.08);
+      animation: orb-pulse 3s ease-in-out infinite;
+    }
+    @keyframes orb-pulse {
+      0%, 100% { transform: translate(-50%,-50%) scale(1);    box-shadow: 0 0 8px 3px rgba(255,245,210,0.8), 0 0 20px 8px rgba(201,164,90,0.6), 0 0 50px 18px rgba(201,164,90,0.25), 0 0 100px 40px rgba(201,164,90,0.08); }
+      50%       { transform: translate(-50%,-50%) scale(1.25); box-shadow: 0 0 12px 5px rgba(255,245,210,1),   0 0 30px 14px rgba(201,164,90,0.8), 0 0 70px 28px rgba(201,164,90,0.35), 0 0 140px 60px rgba(201,164,90,0.12); }
+    }
+
+    /* Orbital rings */
+    .orb-ring {
+      position: absolute;
+      top: 0; left: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(201,164,90,0.25);
+    }
+    .orb-ring-1 {
+      width: 120px; height: 120px;
+      margin: -60px 0 0 -60px;
+      border-color: rgba(201,164,90,0.5);
+      border-width: 1.5px;
+      animation: spin-1 7s linear infinite;
+    }
+    .orb-ring-2 {
+      width: 190px; height: 190px;
+      margin: -95px 0 0 -95px;
+      border-color: rgba(201,164,90,0.28);
+      animation: spin-2 11s linear infinite;
+      border-style: dashed;
+    }
+    .orb-ring-3 {
+      width: 275px; height: 275px;
+      margin: -137px 0 0 -137px;
+      border-color: rgba(201,164,90,0.14);
+      animation: spin-3 18s linear infinite reverse;
+    }
+
+    /* Orbital dots riding the rings */
+    .orb-ring::before, .orb-ring::after {
+      content: '';
+      position: absolute;
+      width: 4px; height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(201,164,90,0.6);
+    }
+    .orb-ring-1::before { top: -2px; left: 50%; transform: translateX(-50%); }
+    .orb-ring-1::after  { bottom: -2px; left: 50%; transform: translateX(-50%); }
+    .orb-ring-2::before { top: 50%; right: -2px; transform: translateY(-50%); }
+    .orb-ring-2::after  { top: 50%; left: -2px; transform: translateY(-50%); width: 3px; height: 3px; opacity: 0.6; }
+    .orb-ring-3::before { top: -2px; left: 30%; width: 3px; height: 3px; opacity: 0.5; }
+    .orb-ring-3::after  { bottom: -2px; right: 25%; width: 3px; height: 3px; opacity: 0.4; }
+
+    @keyframes spin-1  { from { transform: rotate(0deg);   } to { transform: rotate(360deg); } }
+    @keyframes spin-2  { from { transform: rotate(0deg);   } to { transform: rotate(360deg); } }
+    @keyframes spin-3  { from { transform: rotate(0deg);   } to { transform: rotate(360deg); } }
+
     /* ─── LEAD MODAL ─── */
     #lead-overlay {
       position: fixed; inset: 0;
@@ -453,6 +656,22 @@
 
 <!-- Globe stage -->
 <div id="stage">
+
+  <!-- Center orb — fixed in the void, panels orbit around it -->
+  <div id="orb-wrap">
+    <div id="orb-bloom"></div>
+    <div class="orb-tilt" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate3d(1,0.3,0,72deg);">
+      <div class="orb-ring orb-ring-3"></div>
+    </div>
+    <div class="orb-tilt" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate3d(0.4,1,0.2,55deg);">
+      <div class="orb-ring orb-ring-2"></div>
+    </div>
+    <div class="orb-tilt" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate3d(0.2,0.8,1,38deg);">
+      <div class="orb-ring orb-ring-1"></div>
+    </div>
+    <div id="orb-core"></div>
+  </div>
+
   <div id="globe">
 
     <!-- PANEL 0 · 0° · Hero -->
@@ -644,6 +863,18 @@ for (let i = 0; i < 120; i++) {
 /* ─── GLOBE ROTATION ─── */
 const globe = document.getElementById('globe');
 const panels = document.querySelectorAll('.panel');
+
+/* Inject thickness faces into every panel */
+panels.forEach(p => {
+  ['left','right','top','bottom'].forEach(side => {
+    const el = document.createElement('div');
+    el.className = `panel-side-${side}`;
+    p.appendChild(el);
+  });
+  const back = document.createElement('div');
+  back.className = 'panel-back';
+  p.appendChild(back);
+});
 const dots   = document.querySelectorAll('.dot');
 const PANEL_COUNT = 6;
 const STEP = 360 / PANEL_COUNT; // 60°
